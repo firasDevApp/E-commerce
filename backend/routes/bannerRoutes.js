@@ -7,6 +7,11 @@ import {
     updateBanner,
     deleteBanner
 } from "../controllers/bannerController.js";
+import multer from "multer";
+
+const storage = multer.diskStorage({}); // store in temp memory
+const upload = multer({ storage });
+
 
 const router = express.Router();
 
@@ -15,8 +20,8 @@ router.get("/", getBanners);
 router.get("/:id", getBannerById);
 
 // Admin
-router.post("/", authMiddleware, adminMiddleware, createBanner);
-router.put("/:id", authMiddleware, adminMiddleware, updateBanner);
-router.delete("/:id", authMiddleware, adminMiddleware, deleteBanner);
+router.post("/", upload.single("photo"), createBanner); 
+router.put("/:id", upload.single("photo"), updateBanner);
+router.delete("/:id", deleteBanner);
 
 export default router;
