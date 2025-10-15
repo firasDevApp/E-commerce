@@ -1,0 +1,14 @@
+export const getUserProfile = (req, res) => {};
+export const updateUserProfile = (req, res) => {};
+export const getUserOrders = (req, res) => {};
+export const getUserOrder = (req, res) => {};
+export const deleteUserOrder = (req, res) => {};
+export const getUserReviews = (req, res) => {};
+export const deleteUserReview = (req, res) => {};
+export const editUserReview = (req, res) => {};
+export const updateUserReview = (req, res) => {};
+export const getUserComments = (req, res) => {};
+export const deleteUserComment = (req, res) => {};
+export const editUserComment = (req, res) => {};
+export const updateUserComment = (req, res) => {};
+export const changePassword = (req, res) => {};
