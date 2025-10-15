@@ -1,10 +1,18 @@
 import mongoose from "mongoose";
 
-const brandSchema = new mongoose.Schema({
-  title: { type: String, required: true },
-  slug: { type: String, unique: true, required: true },
-  status: { type: String, enum: ["active", "inactive"], default: "active" },
-}, { timestamps: true });
+const brandSchema = new mongoose.Schema(
+  {
+    title: String,
+    slug: { type: String, unique: true },
+    status: { type: String, enum: ["active", "inactive"], default: "active" },
+  },
+  { timestamps: true }
+);
 
-const Brand = mongoose.model("Brand", brandSchema);
-export default Brand;
+brandSchema.virtual("products", {
+  ref: "Product",
+  localField: "_id",
+  foreignField: "brand",
+});
+
+export default mongoose.model("Brand", brandSchema);

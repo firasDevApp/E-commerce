@@ -1,13 +1,26 @@
 import mongoose from "mongoose";
 
-const postCommentSchema = new mongoose.Schema({
-  user_id: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
-  post_id: { type: mongoose.Schema.Types.ObjectId, ref: "Post" },
-  comment: { type: String, required: true },
-  status: { type: String, enum: ["active","inactive"], default: "active" },
-  replied_comment: { type: String },
-  parent_id: { type: mongoose.Schema.Types.ObjectId, ref: "PostComment" },
-}, { timestamps: true });
+const postSchema = new mongoose.Schema(
+  {
+    title: String,
+    slug: { type: String, unique: true },
+    summary: String,
+    description: String,
+    quote: String,
+    photo: String,
+    tags: String,
+    post_cat: { type: mongoose.Schema.Types.ObjectId, ref: "PostCategory" },
+    post_tag: { type: mongoose.Schema.Types.ObjectId, ref: "PostTag" },
+    added_by: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+    status: { type: String, enum: ["active", "inactive"], default: "active" },
+  },
+  { timestamps: true }
+);
 
-const PostComment = mongoose.model("PostComment", postCommentSchema);
-export default PostComment;
+postSchema.virtual("comments", {
+  ref: "PostComment",
+  localField: "_id",
+  foreignField: "post",
+});
+
+export default mongoose.model("Post", postSchema);

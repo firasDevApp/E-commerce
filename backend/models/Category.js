@@ -1,15 +1,29 @@
 import mongoose from "mongoose";
 
-const categorySchema = new mongoose.Schema({
-  title: { type: String, required: true },
-  slug: { type: String, unique: true, required: true },
-  summary: { type: String },
-  photo: { type: String },
-  is_parent: { type: Boolean, default: true },
-  parent_id: { type: mongoose.Schema.Types.ObjectId, ref: "Category" },
-  added_by: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
-  status: { type: String, enum: ["active", "inactive"], default: "inactive" },
-}, { timestamps: true });
+const categorySchema = new mongoose.Schema(
+  {
+    title: String,
+    slug: { type: String, unique: true },
+    summary: String,
+    photo: String,
+    is_parent: { type: Boolean, default: true },
+    parent: { type: mongoose.Schema.Types.ObjectId, ref: "Category" },
+    added_by: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+    status: { type: String, enum: ["active", "inactive"], default: "inactive" },
+  },
+  { timestamps: true }
+);
 
-const Category = mongoose.model("Category", categorySchema);
-export default Category;
+categorySchema.virtual("children", {
+  ref: "Category",
+  localField: "_id",
+  foreignField: "parent",
+});
+
+categorySchema.virtual("products", {
+  ref: "Product",
+  localField: "_id",
+  foreignField: "category",
+});
+
+export default mongoose.model("Category", categorySchema);
