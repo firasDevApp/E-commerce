@@ -15,8 +15,8 @@ router.get("/", getBrands);
 router.get("/:id", getBrandById);
 
 // Admin
-router.post("/", authMiddleware, adminMiddleware, createBrand);
-router.put("/:id", authMiddleware, adminMiddleware, updateBrand);
-router.delete("/:id", authMiddleware, adminMiddleware, deleteBrand);
+router.post("/",  createBrand);
+router.put("/:id", updateBrand);
+router.delete("/:id",  deleteBrand);
 
 export default router;
