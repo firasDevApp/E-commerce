@@ -8,7 +8,7 @@ const categorySchema = new mongoose.Schema(
     photo: String,
     is_parent: { type: Boolean, default: true },
     parent: { type: mongoose.Schema.Types.ObjectId, ref: "Category" },
-    added_by: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+    //added_by: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
     status: { type: String, enum: ["active", "inactive"], default: "inactive" },
   },
   { timestamps: true }
