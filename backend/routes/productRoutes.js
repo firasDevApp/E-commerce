@@ -7,6 +7,10 @@ import {
     updateProduct,
     deleteProduct
 } from "../controllers/productController.js";
+import multer from "multer";
+
+const storage = multer.diskStorage({}); // store in temp memory
+const upload = multer({ storage });
 
 const router = express.Router();
 
@@ -15,8 +19,8 @@ router.get("/", getProducts);
 router.get("/:id", getProductById);
 
 // Admin
-router.post("/", authMiddleware, adminMiddleware, createProduct);
-router.put("/:id", authMiddleware, adminMiddleware, updateProduct);
-router.delete("/:id", authMiddleware, adminMiddleware, deleteProduct);
+router.post("/", upload.array("photos", 5), createProduct);
+router.put("/:id",  upload.array("photos", 5), updateProduct);
+router.delete("/:id", deleteProduct);
 
 export default router;

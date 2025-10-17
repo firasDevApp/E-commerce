@@ -6,7 +6,7 @@ const productSchema = new mongoose.Schema(
     slug: { type: String, unique: true },
     summary: String,
     description: String,
-    photo: String,
+    photos: [String],
     stock: { type: Number, default: 1 },
     size: { type: String, default: "M" },
     condition: { type: String, enum: ["default", "new", "hot"], default: "default" },
