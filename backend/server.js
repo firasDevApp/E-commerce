@@ -6,6 +6,7 @@ import bodyParser from "body-parser";
 
 // Routes imports
 import authRoutes from "./routes/authRoutes.js";
+import userManagementRoutes from "./routes/userManagementRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
 import adminRoutes from "./routes/adminRoutes.js";
 import productRoutes from "./routes/productRoutes.js";
@@ -40,6 +41,7 @@ mongoose
 
 // API routes
 app.use("/api/auth", authRoutes);
+app.use("/api/users-management", userManagementRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/admin", adminRoutes);
 app.use("/api/products", productRoutes);

@@ -6,8 +6,6 @@ const userSchema = new mongoose.Schema({
   password: { type: String },
   photo: { type: String },
   role: { type: String, enum: ["admin", "user"], default: "user" },
-  provider: { type: String },
-  provider_id: { type: String },
   status: { type: String, enum: ["active", "inactive"], default: "active" },
 }, { timestamps: true });
 
